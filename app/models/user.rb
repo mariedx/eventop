@@ -1,4 +1,7 @@
+require_relative '../mailers/user_mailer'
+
 class User < ApplicationRecord
+  after_create :welcome_send
   #has_secure_password
 
   has_many :attendances
@@ -9,4 +12,8 @@ class User < ApplicationRecord
   validates :description, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
+
+  def welcome_send
+    UserMailer.welcome_email(self).deliver_now
+  end
 end
