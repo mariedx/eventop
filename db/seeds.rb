@@ -1,10 +1,10 @@
 require 'faker'
 require 'time'
 
-#create random users
-10.times do 
+# create random users
+3.times do
   User.create!(email: Faker::Name.first_name+Faker::Name.last_name+"@yopmail.com",
-  encrypted_password: ["yellow", "coucou", "marseille", "password", "supersuper"].sample,
+  password: ["yellow1!!", "@coucou23", "4marseille?", "password-87", "!supersuper"].sample,
   description: Faker::TvShows::Community.quotes,
   first_name: Faker::Name.first_name,
   last_name: Faker::Name.last_name)
@@ -14,15 +14,16 @@ puts "USERS"
 puts tp User.all
 
 #create random events
-10.times do
-  admin = User.all.sample
-  Event.create!(start_date: "2020-12-15T00:00:00+00:00", #DateTime.now + rand(1..100),
+5.times do
+
+  Event.create!(
+  start_date: Faker::Date.between(from: Date.today, to: 1.year.from_now),
   duration: [15, 30, 45, 60, 90].sample,
   title: ["Pikachu", "Bulbizar", "Salameche", "Carapuce", "Roucoul", "Ratata", "Chenipan"].sample,
-  description: "Mon métier est "+Faker::Job.title+"et mon film préféré est"+Faker::Movie.title,
+  description: "Evenement a destination des "+Faker::Job.title+" et qui ont vu récement "+Faker::Movie.title,
   price: Faker::Number.between(from: 1, to: 1000),
-  location: ["Mendoza", "Bariloche", "El Calafate", "Buenos Aires", "Salta", "Cordoba", "Rosario", "El Chalten"].sample,
-  admin: admin)
+  location: ["rue de Mendoza", "avenue Bariloche", "rue de El Calafate", "impasse Buenos Aires", "place Salta", "boulevard Cordoba", "stade Rosario", "salle El Chalten"].sample,
+  admin: User.all.sample)
 end
 puts "*" * 20
 puts "EVENTS"
