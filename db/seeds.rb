@@ -15,7 +15,6 @@ puts tp User.all
 
 #create random events
 5.times do
-
   Event.create!(
   start_date: Faker::Date.between(from: Date.today, to: 1.year.from_now),
   duration: [15, 30, 45, 60, 90].sample,
@@ -28,3 +27,15 @@ end
 puts "*" * 20
 puts "EVENTS"
 puts tp Event.all
+
+#create random attendances
+5.times do
+  Attendance.create!(
+  stripe_customer_id: 23456771,
+  participant: User.all.sample,
+  event: Event.find(1)
+  )
+end
+puts "*" * 20
+puts "ATTENDANCES"
+puts tp Attendance.all
