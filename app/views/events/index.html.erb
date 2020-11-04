@@ -1,2 +1,35 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
+<div class="container">
+  
+  <!-- JUMBOTRON -->
+  <div class="jumbotron jumbotron-fluid background-image">
+    <div class="container text-center">
+      <h1 class="display-4 mt-5">EvenTop</h1>
+      <h2 class="lead">Créer des évènements inoubliables</h2>
+      <br >
+      <a class="btn btn-light btn-lg" href=new_event_path role="button">Créer un évènement</a>    
+    </div>
+  </div>
+
+  <!-- TOUS LES EVENTS -->
+  <div class="row">
+    <% @events.each_with_index do |event, i| %>
+      <div class="card-deck mx-auto text-center">
+        <div class="card mb-4 shadow-sm">
+          <div class="card-header">
+            <h4 class="my-0 font-weight-normal">Evenement <%= event.id %></h4>
+          </div>
+          <div class="card-body">
+          <div class="text-wrap bd-highlight" style="width: 15rem;">
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>Titre: <%= event.title %></li>
+              <br>
+              <li>Description: <%= event.description %></li>
+            </ul>
+          <%= link_to "Découvre l'evenement", event_path(event.id), class: "btn btn-lg btn-block btn-outline-primary" %>
+          </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
