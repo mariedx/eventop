@@ -1,12 +1,9 @@
-require 'time'
-
 class Event < ApplicationRecord
-  belongs_to :admin, class_name: "User" #admin
+  belongs_to :admin, class_name: "User" #User admin
   has_many :attendances
-  has_many :participants, through: :attendances #participants
+  has_many :participants, through: :attendances #User participants
 
-  validates_presence_of :start_date
-  validate :start_date_cannot_be_in_the_past
+  validates :start_date, presence: true, if: :future_date
   
   validates :duration, presence: true, numericality: {greater_than: 0}, if: :is_multiple? #multiple de 5, et est strictement positif
   validates :title, presence: true, length: { in: 5..140 } #doit faire au moins 5 caractères et maxi 140 caractères.
@@ -20,15 +17,7 @@ class Event < ApplicationRecord
     end
   end
 
-  private
-
-  def start_date_cannot_be_in_the_past
-    if start_date < Date.today
-      errors.add(:start_date, "can't be in the past")
-    end
+  def future_date
+    errors.add(:start_date, "Event can't be in the past") unless start_date > DateTime.now
   end
 end
-
-# errors.add(:start_date, "can't be in the past") unless
-# self.start_date < Date.today
-# end

@@ -9,9 +9,12 @@
 
 #showshow {
   height: 400px;
-  background-image: url("drink.jpg");
-  background-position-y: 40%;
+  background-image: url("confetis.jpg");
+  background-position-y: 50%;
   opacity: 0.8;
-  background-repeat: no-repeat;
-  background-size: cover;
+}
+
+.jumbotron h2{
+  text-transform: uppercase;
+  letter-spacing: .3rem;
 }

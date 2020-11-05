@@ -15,8 +15,11 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(post_params)
-    @event.event_admin = current_user
-
+    @event.admin = current_user
+    puts "$" * 50
+    puts @event
+    puts params[:start_date]
+    puts "$" * 50
     if @event.save
       redirect_to event_path(@event.id), success: "Evénement créé avec succès !"
     else
@@ -34,6 +37,6 @@ class EventsController < ApplicationController
   end
 
   def post_params
-    post_params = params.require(:event).permit(:start_date, :title, :duration, :description, :price, :location)
+    post_params = params.require(:event).permit(:title, :location, :description, :start_date, :price, :duration)
   end
 end
