@@ -1,6 +1,6 @@
 .background-image {
   height: 400px;
-  background-image: url("balloon.jpg");
+  background-image: url(https://images.unsplash.com/photo-1529395792713-26858d750725?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1504&q=80);
   background-position-y: 40%;
   opacity: 0.8;
   background-repeat: no-repeat;
@@ -8,8 +8,8 @@
 }
 
 #showshow {
-  height: 400px;
-  background-image: url("confetis.jpg");
+  height: 350px;
+  background-image: url(https://images.unsplash.com/photo-1559456751-057ed03f3143?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1676&q=80);
   background-position-y: 50%;
   opacity: 0.8;
 }
