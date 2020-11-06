@@ -11,6 +11,7 @@ class AttendancesController < ApplicationController
   end
 
   def create
+
     @amount = @event.amount
     begin
     customer = Stripe::Customer.create({
@@ -25,7 +26,13 @@ class AttendancesController < ApplicationController
       currency: 'eur',
       })
       
-      Attendance.create(user: current_user, event: @event, stripe_customer_id: customer.id)
+      new_a = Attendance.new(event: @event, stripe_customer_id: customer.id)
+      puts "$" * 50
+      puts current_user.id
+      puts new_a
+      puts "$" * 50
+      new_a.user_id = current_user.id
+      new_a.save
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
