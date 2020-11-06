@@ -1,5 +1,12 @@
 class UsersController < ApplicationController
+  before_action :authenticate_user!
+
   def show
+    @user = current_user
+    @events = Event.where(admin: @user)
+  end
+
+  def edit
     @user = current_user
   end
 
@@ -11,6 +18,4 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def destroy
-  end
 end

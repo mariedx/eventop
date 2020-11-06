@@ -8,13 +8,12 @@
   <body>
 
     <!-- JUMBOTRON -->
-
     <div class="jumbotron jumbotron-fluid background-image" id="showshow">
       <div class="container text-center">
         <h1 class="display-4 mt-5">Événement <%=@event.title%></h1>
         <br>
-        <h2><%= @event.attendances.count %> <%= (@event.attendances.count) == 1 ? 'Participant' : 'Participants'%></h2>
-        <a class="btn btn-light btn-lg" href=root_path role="button">Je participe</a>    
+        <h2><%= @event.attendances.count %> <%= (@event.attendances.count) == 1 ? 'Participant' : 'Participants'%></h2> 
+        <%= link_to "Je participe", new_event_attendance_path(@event.id), class: "btn btn-light btn-lg" %>
       </div>
     </div>
 
