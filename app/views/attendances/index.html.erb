@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <br>
+      <h2>Gérer ton évènement "<%=@event.title %>"</h2>
+      <br>
+      <h3>📅  Date de début : <%=@event.start_date %></h3>
+      <h3>📍 Lieu : <%= @event.location %></h3>
+      <h3>⏱ Durée : <%=@event.duration %> minutes</h3>
+      <h3>💰 Prix : <%= @event.price %>€</h3>
+      <h3>❓ Description : <%= @event.description %></h3>
+      <br>
+      <%= link_to "Editer l'évènement", edit_event_path(@event.id), class: "btn btn-light btn-lg" %>
+      <%= link_to "Supprimer l'évènement", event_path(@event.id), :class => "btn btn-light btn-lg", :method => 'DELETE', :data => {:confirm => 'Sûr ?'} %>
+    </div>
+
+    <div class="col-md-6">
+      <br>
+      <h2 class="text-center">Les participants</h2>
+
+          <% @attendances.each do |a| %>
+            <div class="card-deck mx-auto">
+              <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-normal"></h4>
+                  <h4 class="my-0 font-weight-normal"></h4>
+                </div>
+                <div class="card-body">
+                  <div class="text-wrap bd-highlight" style="width: 15rem;">
+                    <ul class="list-unstyled mt-3 mb-4">
+                      <li>First name : <%= a.user.first_name ? a.user.first_name : "Not mentionned" %></li>
+                      <li>First name : <%= a.user.first_name ? a.user.first_name : "Not mentionned" %></li>
+                      <li>Last name : <%= a.user.last_name ? a.user.last_name : "Not mentionned" %></li>
+                      <li>Email : <%= a.user.email ? a.user.email : "Not mentionned" %></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>

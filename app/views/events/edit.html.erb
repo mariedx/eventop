@@ -1,15 +1,3 @@
-<!-- Si erreur -->
-<% if @event.errors.any? %>
-  <div class="alert alert-danger text-center" role="alert">
-    <p>Nous n'avons pas réussi à créer l'évènement pour la (ou les) raison(s) suivante(s) :</p>
-    <ul>
-    <% @event.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
-    <% end %>
-    </ul>
-  </div>
-<% end %>
-
 <div class="container">
   
   <div class="row">
@@ -18,7 +6,7 @@
 
       <%= form_for @event, html: { class: "form-signin mt-3" } do |f| %>
         
-        <h1 class="h3 mb-3 font-weight-normal text-center">Crée un évènement</h1>
+        <h1 class="h3 mb-3 font-weight-normal text-center">Modifie ton évènement</h1>
         
         <div class="form-group">
           <%= f.label :start_date, "Date" %> 
@@ -51,7 +39,7 @@
         </div>
 
         <div class="actions mt-5">
-          <%= f.submit "Créer", class: "btn btn-lg btn-danger btn-block" %>
+          <%= f.submit "Enregister les modifications", class: "btn btn-lg btn-danger btn-block" %>
         </div>
       <% end %>
 

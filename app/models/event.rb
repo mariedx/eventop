@@ -1,7 +1,7 @@
 class Event < ApplicationRecord
   belongs_to :admin, class_name: "User" #User admin
   has_many :attendances
-  has_many :participants, through: :attendances #User participants
+  has_many :users, through: :attendances #User participants
 
   validates :start_date, presence: true, if: :future_date
   
@@ -19,5 +19,9 @@ class Event < ApplicationRecord
 
   def future_date
     errors.add(:start_date, "Event can't be in the past") unless start_date > DateTime.now
+  end
+
+  def amount
+    self.price * 100
   end
 end

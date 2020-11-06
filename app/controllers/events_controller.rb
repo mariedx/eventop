@@ -1,30 +1,49 @@
 class EventsController < ApplicationController
   before_action :authenticate_user, except: [:index, :show]
 
+  def index
+    @events = Event.all
+  end
+
   def new
     @event = Event.new
   end
 
-  def index
-    @events = Event.all
+  def create
+    @event = Event.new(post_params)
+    @event.admin = current_user
+    if @event.save
+      redirect_to event_path(@event.id), success: "Evénement créé avec succès !"
+    else
+      render :new
+    end
   end
 
   def show
     @event = Event.find(params[:id])
   end
 
-  def create
-    @event = Event.new(post_params)
-    @event.admin = current_user
-    puts "$" * 50
-    puts @event
-    puts params[:start_date]
-    puts "$" * 50
-    if @event.save
-      redirect_to event_path(@event.id), success: "Evénement créé avec succès !"
+  def edit
+    @event = Event.find(params[:id])
+  end
+
+  def update
+    @event = Event.find(params[:id])
+    if @event.update(post_params)
+      redirect_to event_path(@event.id)
     else
-      render :new
+      render :edit
     end
+  end
+
+  def destroy
+    @event = Event.find(params[:id])
+    @event.destroy
+    redirect_to root_path
+  end
+
+  def event
+    @event = Event.find_by(id: params[:event_id])
   end
 
   private

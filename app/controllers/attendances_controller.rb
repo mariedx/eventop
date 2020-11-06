@@ -2,17 +2,16 @@ class AttendancesController < ApplicationController
   before_action :event, only: [:index, :create, :new]
   before_action :authenticate_user!
 
+  def index
+    @attendances = @event.attendances
+  end
+
   def new
     @attendance = Attendance.new
   end
 
-  def index
-    @event = Event.find_by(id: params[:event_id])
-    @attendances = @event.attendances
-  end
-
   def create
-    @amount = @event.price
+    @amount = @event.amount
     begin
     customer = Stripe::Customer.create({
       email: params[:stripeEmail],
@@ -26,7 +25,7 @@ class AttendancesController < ApplicationController
       currency: 'eur',
       })
       
-      Attendance.create(participant: current_user, event: @event, stripe_customer_id: customer.id)
+      Attendance.create(user: current_user, event: @event, stripe_customer_id: customer.id)
 
     rescue Stripe::CardError => e
       flash[:error] = e.message
@@ -34,9 +33,8 @@ class AttendancesController < ApplicationController
     end
   end
 
-  private
-
   def event
     @event = Event.find_by(id: params[:event_id])
   end
+
 end

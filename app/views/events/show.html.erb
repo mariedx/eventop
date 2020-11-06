@@ -1,34 +1,32 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Créer un événement</title>
-  </head>
+<!-- JUMBOTRON -->
+<div class="jumbotron jumbotron-fluid background-image" id="showshow">
+  <div class="container text-center">
+    <h1 class="display-4 mt-5">Événement <%=@event.title%></h1>
+    <br>
+    <h2><%= @event.attendances.count %> <%= (@event.attendances.count) == 1 ? 'Participant' : 'Participants'%></h2> 
+    
+    <% if current_user == @event.admin %>
+    <%= link_to "Gérer mon évènement", event_attendances_path(@event.id), class: "btn btn-light btn-lg" %>
+    <% else %>
+    <%= link_to "Rejoindre cet évènement", new_event_attendance_path(@event.id), class: "btn btn-light btn-lg" %>
+    <% end %>
+    
+  </div>
+</div>
 
-  <body>
-
-    <!-- JUMBOTRON -->
-    <div class="jumbotron jumbotron-fluid background-image" id="showshow">
-      <div class="container text-center">
-        <h1 class="display-4 mt-5">Événement <%=@event.title%></h1>
-        <br>
-        <h2><%= @event.attendances.count %> <%= (@event.attendances.count) == 1 ? 'Participant' : 'Participants'%></h2> 
-        <%= link_to "Je participe", new_event_attendance_path(@event.id), class: "btn btn-light btn-lg" %>
-      </div>
+<div class="container" style= "margin-bottom: 45px">
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>📅  Date de début : <%=@event.start_date %></h3>
+      <h3>📍 Lieu : <%= @event.location %></h3>
+      <h3>⏱ Durée : <%=@event.duration %> minutes</h3>
+      <h3>💰 Prix : <%= @event.price %>€</h3>
+      <h3>❓ Description : <%= @event.description %></h3>
+      <% if current_user == @event.admin %>
+      <h3>👤 Orgnanisé par : Moi </h3>
+      <% else %>
+      <h3>👤 Orgnanisé par : <%= @event.admin.first_name %> <%= @event.admin.last_name %></h3>
+      <% end %>
     </div>
-
-    <div class="container" style= "margin-bottom: 45px">
-      <div class="row">
-          <div class="col-sm-12">
-            <h3>📅  Date de début : <%=@event.start_date %></h3>
-            <h3>📍 Lieu : <%= @event.location %></h3>
-            <h3>⏱ Durée : <%=@event.duration %> minutes</h3>
-            <h3>💰 Prix : <%= @event.price %>€</h3>
-            <h3>❓ Description : <%= @event.description %></h3>
-            <h3>👤 Orgnanisé par : <%= @event.admin.first_name %> <%= @event.admin.last_name %></h3>
-        </div>
-      </div>
-    </div>
-
-  </body>
-</html>
+  </div>
+</div>
