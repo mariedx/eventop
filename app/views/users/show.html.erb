@@ -19,11 +19,15 @@
 
       <!--text-->
       <div class="card-body">
-        <h3 class="card-title">NOM Prénom<%="#{@user.first_name} #{@user.last_name}"%></h3>
-        <hr>
+      <h3 class="font-weight-light"><span class="text-secondary"><% if current_user.first_name != nil%> <%= @user.first_name%> <% end%> <% if current_user.last_name != nil%> <%= @user.last_name%> <% end%></span>
+       <hr>
       <h6 class="font-weight-bold">Description: </h6> <p class="text-secondary">Description<%= @user.description %></p>
       <h6 class="font-weight-bold">Email: </h6> <p class="text-secondary"><%= @user.email %></p>
       </div>
+
+      <!--boutons-->
+      <%= link_to "Editer mes informations", edit_user_path(@user), :class => "btn btn-primary" %>
+      <%= link_to "Editer mes identifiants", edit_user_registration_path(@user), :class => "btn btn-secondary" %>
     </div>
   </div>
 
